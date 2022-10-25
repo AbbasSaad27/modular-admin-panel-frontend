@@ -1,0 +1,22 @@
+.crudItem-page {
+    flex: 1;
+    position: relative;
+    overflow-y: scroll;
+    padding-bottom: 2rem;
+}
+.data-table-container {
+    padding: 0 2rem;
+}
+
+.crudItem-page::-webkit-scrollbar {
+    width: 5px;
+}
+.crudItem-page::-webkit-scrollbar-track {
+    background: #FFEFD6;
+}
+.crudItem-page::-webkit-scrollbar-thumb {
+    background: #1B1811;
+}
+.capt {
+    text-transform: capitalize;
+}

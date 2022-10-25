@@ -1,0 +1,42 @@
+.form-container {
+    flex: 1;
+    padding: 2rem;
+    overflow-y: scroll;
+    scrollbar-color: rebeccapurple green;
+    scrollbar-width: thin;
+    position: relative;
+}
+.form-container::-webkit-scrollbar {
+    width: 5px;
+}
+.form-container::-webkit-scrollbar-track {
+    background: #FFEFD6;
+}
+.form-container::-webkit-scrollbar-thumb {
+    background: #1B1811;
+}
+.form-title {
+    text-align: center;
+    font-size: 3rem;
+    margin-bottom: 3rem;
+}
+.form-icon {
+    width: 2rem;
+    margin-right: .5rem;
+}
+.form-toggle-btn {
+    background-color: unset;
+    border: 2px solid #1B1811;
+    display: flex;
+    align-items: center;
+    padding: .5rem;
+    cursor: pointer;
+    font-size: 1.4rem;
+    font-family: inherit;
+}
+.btn-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 2rem;
+}

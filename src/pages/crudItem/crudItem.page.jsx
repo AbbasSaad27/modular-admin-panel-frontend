@@ -1,0 +1,42 @@
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import DataForm from "../../components/data-form/dataForm.component";
+import DataTable from "../../components/data-table/data-table.component";
+import FormContainer from "../../components/form-container/form-container.component";
+import Loader from "../../components/loader/loader.component";
+
+import './crudItem.styles.css';
+
+const CrudItem = () => {
+    const {crudItem} = useParams();
+    const [loader, setLoader] = useState(true)
+    const [valData, setValData] = useState([])
+    const [data, setData] = useState({})
+    console.log("rerender", valData)
+    useEffect(function() {
+        setValData([]);
+        fetch(`https://modular-ap.herokuapp.com/api/crud/${crudItem.toLowerCase()}`)
+        .then(res => res.json())
+        .then(data => {
+            setData(data);
+            setLoader(false)
+        })
+        
+        fetch(`https://modular-ap.herokuapp.com/api/data/${crudItem.toLowerCase()}`)
+        .then(res => res.json())
+        .then(data => setValData([...data.data]))
+    }, [crudItem])
+    return (
+        <div className="crudItem-page">
+        {loader ? <Loader /> :
+            <>
+                <FormContainer title={crudItem} DataForm={DataForm} data={data} setValData={setValData}/>
+                <div className="data-table-container">
+                    <DataTable crudItem={crudItem} data={valData}/>
+                </div>
+            </>}
+        </div>
+    )
+}
+
+export default CrudItem;

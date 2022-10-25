@@ -1,0 +1,40 @@
+.side-bar {
+    width: 300px;
+    /* box-shadow: 0 0 15px 1px rgba(88, 88, 88, 0.507); */
+    height: 100%;
+    text-align: center;
+    padding: 2rem 1rem;
+    color: white;
+    background-color: #1B1811;
+    position: relative;
+    padding-bottom: 3rem;
+}
+.side-bar--title {
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+}
+
+.crud-list {
+    list-style: none;
+    text-align: left;
+}
+
+.crud-list-item {
+    margin-top: 1rem;
+    padding: 1rem;
+    border-bottom: 2px solid #FFEFD6;
+}
+
+.menu-link {
+    color: white;
+    font-size: 1.8rem;
+    text-transform: capitalize;
+}
+
+.btn-home {
+    color: white;
+    padding: 1rem;
+    font-size: 1.5rem;
+    position: absolute;
+    bottom: 0;
+}

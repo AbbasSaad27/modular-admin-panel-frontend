@@ -1,0 +1,18 @@
+.form-block-title {
+    margin-top: 2rem;
+    margin-bottom: .5rem;
+    display: inline-block;
+}
+
+.form-block {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    border: 2px solid #1B1811;
+    padding: 2rem;
+}
+.block-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
