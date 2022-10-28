@@ -9,6 +9,7 @@ const DataTable = ({crudItem, setData, data = []}) => {
             <thead>
                 <tr>
                     {Object.keys(data[0]).map((title, i) => {
+                        if(title === "__v") return ""
                         return(
                             <th key={i+1}>{i === 0 ? "No." : title}</th>
                         )
@@ -21,7 +22,9 @@ const DataTable = ({crudItem, setData, data = []}) => {
                         <tr key={obj._id}>
                             {
                                 Object.values(obj).map((value, i) => {
-                                    return <td key={i+1}>{i === 0 ? (indx+1) : value}</td>
+                                    const formattedValue = typeof value === "object" ? value.join(", ") : value;
+                                    if(obj["__v"] === value) return ""
+                                    return <td key={i+1}>{i === 0 ? (indx+1) : formattedValue}</td>
                                 })
                             }
                         </tr>
