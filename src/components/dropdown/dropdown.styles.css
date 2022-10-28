@@ -1,0 +1,14 @@
+.dropdown {
+    font-family: inherit;
+    background-color: unset;
+    padding: 1rem 2rem;
+    width: 95%;
+    border: 2px solid #181b11;
+    font-size: 1.4rem;
+    max-height: 9.5rem;
+}
+
+
+.dropdown option {
+    padding: 1rem;
+}

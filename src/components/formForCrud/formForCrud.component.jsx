@@ -30,13 +30,30 @@ const FormForCrud = ({title, setSideMenus, sideMenus}) => {
         //     url: "https://modular-ap.herokuapp.com/api/crud",
         //     data: {...value}
         // })
+        const newInputFields = value.inputFields.map((obj) => {
+            if(obj["type"] === "checkbox") {
+                const newObj = {
+                    ...obj,
+                    options: ["create", "read", "delete", "update"]
+                }
+                return newObj
+            }
+
+            return obj;
+        })
+        // if(ifCheckBox)  { 
+        // setValue({
+        //     ...value,
+        //     inputFields: [ newInputFields ]
+        // })
+        // }
         fetch("https://modular-ap.herokuapp.com/api/crud", {
             method: "POST",
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             }, 
-            body: JSON.stringify(value)
+            body: JSON.stringify({...value, inputFields: [ ...newInputFields]})
         })
         .then(res => res.json())
         .then(data => setLoader(false))

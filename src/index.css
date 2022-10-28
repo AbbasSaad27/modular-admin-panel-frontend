@@ -40,3 +40,13 @@ a {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 } */
+
+.scrollbar::-webkit-scrollbar {
+  width: 5px;
+}
+.scrollbar::-webkit-scrollbar-track {
+  background: #FFEFD6;
+}
+.scrollbar::-webkit-scrollbar-thumb {
+  background: #1B1811;
+}

@@ -12,20 +12,28 @@ const CrudItem = () => {
     const [loader, setLoader] = useState(true)
     const [valData, setValData] = useState([])
     const [data, setData] = useState({})
-    console.log("rerender", valData)
+    const crudItemLow = crudItem.toLowerCase();
+
     useEffect(function() {
         setValData([]);
-        fetch(`https://modular-ap.herokuapp.com/api/crud/${crudItem.toLowerCase()}`)
-        .then(res => res.json())
-        .then(data => {
-            setData(data);
-            setLoader(false)
-        })
+        setLoader(true);
+        // if(!initItem) {      
+            fetch(`https://modular-ap.herokuapp.com/api/crud/${crudItemLow}`)
+            .then(res => res.json())
+            .then(data => {
+                setData(data);
+                setLoader(false)
+            })
+        // } else {
+        //     setData(initItem);
+        //     setLoader(false)
+        // }
         
-        fetch(`https://modular-ap.herokuapp.com/api/data/${crudItem.toLowerCase()}`)
+        fetch(`https://modular-ap.herokuapp.com/api/data/${crudItemLow}`)
         .then(res => res.json())
         .then(data => setValData([...data.data]))
-    }, [crudItem])
+        .catch((err) => console.log(err))
+    }, [crudItemLow])
     return (
         <div className="crudItem-page">
         {loader ? <Loader /> :

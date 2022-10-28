@@ -15,3 +15,8 @@
     margin-top: 1.5rem;
     width: 48%;
 }
+
+.checkbox-input {
+    display: inline;
+    width: auto;
+}

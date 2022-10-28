@@ -1,8 +1,8 @@
-import React, { useEffect } from "react";
+import React from "react";
 import "./data-table.styles.css";
 
-const DataTable = ({crudItem, setData, data}) => {
-    
+const DataTable = ({crudItem, setData, data = []}) => {
+    console.log(data)
     return (
         data[0] ? 
         <table className="data-table">
