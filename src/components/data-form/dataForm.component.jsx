@@ -8,7 +8,6 @@ import "./dataForm.styles.css";
 import UserContext from "../../utilities/contexts/userContexts/userContext";
 
 const DataForm = ({data: {crudName, inputFields}, setValData}) => {
-    console.log(inputFields)
     const [docRefs, setDocRefs] = useState("");
     const [permissions, setPermissions] = useState([]);
     const [roles, setRoles] = useState([])
@@ -40,7 +39,6 @@ const DataForm = ({data: {crudName, inputFields}, setValData}) => {
         }
 
         setInputVals({...newInputVals})
-        console.log(inputVals)
     }
 
     const sendData = async(e) => {
@@ -53,7 +51,7 @@ const DataForm = ({data: {crudName, inputFields}, setValData}) => {
             alert("please fill up the full form");
             return;
         }
-        const res = await fetch(`https://modular-ap.herokuapp.com/api/data/${crudName.toLowerCase()}`, {
+        await fetch(`https://modular-ap.herokuapp.com/api/data/${crudName.toLowerCase()}`, {
             method: "POST",
             headers: {
                 'Accept': 'application/json',
@@ -61,37 +59,39 @@ const DataForm = ({data: {crudName, inputFields}, setValData}) => {
             },
             body: JSON.stringify(inputVals)
         })
-
-        const err = await res.json();
-        console.log(err)
         
         const dataRes = await fetch(`https://modular-ap.herokuapp.com/api/data/${crudName.toLowerCase()}`)
         const data = await dataRes.json();
-        console.log(data)
-        // console.log(data.data)
         setValData(data.data);
     }
 
     const changeDropdVal = (e) => {
-        const selectedVal = e.target.value;
-        console.log(selectedVal)
-        if(e.target.name === "permissions") {
+        const {target} = e
+        const {value, name, options, selectedIndex} = target
+        const selectedVal = value;
+        if(name === "permissions") {
             setInputVals({
                 ...inputVals,
-                [e.target.name]: [e.target.value],
+                [name]: [value],
+            })
+            return;
+        }
+        if(name === "role") {
+            setInputVals({
+                ...inputVals,
+                [name]: options[selectedIndex].text
             })
             return;
         }
         setInputVals({
             ...inputVals,
-            [e.target.name]: e.target.value,
+            [name]: value,
         })
-        if(e.target.name.includes("collection")) {
+        if(name.includes("collection")) {
             fetch(`https://modular-ap.herokuapp.com/api/data/${selectedVal.toLowerCase()}`)
             .then(rest => rest.json())
             .then(data => setDocRefs(data.data))
         }
-        console.log(inputVals)
     }
 
     const checkBoxChange = (e) => {
@@ -109,7 +109,6 @@ const DataForm = ({data: {crudName, inputFields}, setValData}) => {
                 [name]: [...newVal]
             })
         }
-        console.log(inputVals)
     }
 
     return(
