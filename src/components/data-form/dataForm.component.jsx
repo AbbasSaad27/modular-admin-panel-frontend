@@ -44,7 +44,7 @@ const DataForm = ({data: {crudName, inputFields}, setValData}) => {
     const sendData = async(e) => {
         e.preventDefault()
         const dataPopulated = inputFields.every((obj) => {
-            if(inputVals[obj["name"]]) return true;
+            if(inputVals[obj["name"]] || !inputVals["docRef"]) return true;
             else return false;
         })
         if(!dataPopulated) {
