@@ -1,0 +1,22 @@
+.error-page {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.error-page h1 {
+    font-size: 8rem;
+    text-align: center;
+}
+
+.error-page p {
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+.btn-back {
+    display: block;
+    margin: 2rem auto 0;
+}

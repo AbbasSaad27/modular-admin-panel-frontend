@@ -9,7 +9,7 @@ import Loader from '../../components/loader/loader.component';
 import "./login.styles.css";
 
 const Login = ({setBearer}) => {
-    const [loader, setLoader] = useState(false);
+    const [loader, setLoader] = useState(true);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -17,6 +17,8 @@ const Login = ({setBearer}) => {
         if(prevBearer) {
             setBearer(prevBearer);
             navigate("/")
+        } else {
+            setLoader(false)
         }
     })
 

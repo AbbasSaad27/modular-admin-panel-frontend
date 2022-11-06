@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useContext } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import DataForm from "../../components/data-form/dataForm.component";
 import DataTable from "../../components/data-table/data-table.component";
 import FormContainer from "../../components/form-container/form-container.component";
@@ -16,16 +16,18 @@ const CrudItem = () => {
     const [valData, setValData] = useState([])
     const [data, setData] = useState({})
     const crudItemLow = crudItem.toLowerCase();
-    const bearer = useContext(BearerContext);
+    const {bearer} = useContext(BearerContext);
+    const navigate = useNavigate();
 
     useEffect(function() {
         setValData([]);
         setLoader(true);
         // if(!initItem) {      
+        try {
             fetch(`https://modular-ap.herokuapp.com/api/crud/${crudItemLow}`, {
                 method: "GET",
                 headers: {
-                    "Authorization": bearer
+                    "Authorization": `Bearer ${bearer}`
                 }
             })
             .then(res => res.json())
@@ -33,20 +35,23 @@ const CrudItem = () => {
                 setData(data);
                 setLoader(false)
             })
-        // } else {
-        //     setData(initItem);
-        //     setLoader(false)
-        // }
         
-        fetch(`https://modular-ap.herokuapp.com/api/data/${crudItemLow}`, {
-            method: "GET",
-            headers: {
-                "Authorization": bearer
-            }
-        })
-        .then(res => res.json())
-        .then(data => setValData([...data.data]))
-        .catch((err) => console.log(err))
+            fetch(`https://modular-ap.herokuapp.com/api/data/${crudItemLow}`, {
+                method: "GET",
+                headers: {
+                    "Authorization": `Bearer ${bearer}`
+                }
+            })
+            .then(res => res.json())
+            .then(data => {
+                if(data.status === 'fail') {
+                    navigate("*")
+                    return;
+                }
+                setValData([...data.data])
+            })
+        } catch(error) {
+        }
     }, [crudItemLow, bearer])
     return (
         <div className="crudItem-page">

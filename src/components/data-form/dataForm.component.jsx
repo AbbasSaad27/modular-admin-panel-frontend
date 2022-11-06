@@ -13,14 +13,14 @@ const DataForm = ({data: {crudName, inputFields}, setValData}) => {
     const [permissions, setPermissions] = useState([]);
     const [roles, setRoles] = useState([])
     const crudItems = useContext(UserContext);
-    const bearer = useContext(BearerContext)
+    const {bearer} = useContext(BearerContext)
 
     useEffect(() => {
         if(crudName === "roles") {
             fetch("https://modular-ap.herokuapp.com/api/data/permissions", {
                 method: "GET",
                 headers: {
-                    "Authorization": bearer
+                    "Authorization": `Bearer ${bearer}`
                 }
             })
             .then(res => res.json())
@@ -30,7 +30,7 @@ const DataForm = ({data: {crudName, inputFields}, setValData}) => {
             fetch("https://modular-ap.herokuapp.com/api/data/roles", {
                 method: "GET",
                 headers: {
-                    "Authorization": bearer
+                    "Authorization": `Bearer ${bearer}`
                 }
             })
             .then(res => res.json())
@@ -68,7 +68,7 @@ const DataForm = ({data: {crudName, inputFields}, setValData}) => {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
-                "Authorization": bearer
+                "Authorization": `Bearer ${bearer}`
             },
             body: JSON.stringify(inputVals)
         })
@@ -76,7 +76,7 @@ const DataForm = ({data: {crudName, inputFields}, setValData}) => {
         const dataRes = await fetch(`https://modular-ap.herokuapp.com/api/data/${crudName.toLowerCase()}`, {
             method: "GET",
             headers: {
-                "Authorization": bearer
+                "Authorization": `Bearer ${bearer}`
             }
         })
         const data = await dataRes.json();
@@ -109,7 +109,7 @@ const DataForm = ({data: {crudName, inputFields}, setValData}) => {
             fetch(`https://modular-ap.herokuapp.com/api/data/${selectedVal.toLowerCase()}`, {
                 method: "GET",
                 headers: {
-                    "Authorization": bearer
+                    "Authorization": `Bearer ${bearer}`
                 }
             })
             .then(rest => rest.json())

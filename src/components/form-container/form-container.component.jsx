@@ -16,10 +16,9 @@ import "./form-container.styles.css";
 
 const FormContainer = ({title, setSideMenus, sideMenus, DataForm, data, setValData}) => {
     const navigate = useNavigate();
-    const bearer = useContext(BearerContext)
+    const {bearer, setBearer} = useContext(BearerContext)
     useEffect(() => {
         if(!bearer) {
-            console.log("helo")
             navigate("/login")
         }
     },)
@@ -61,9 +60,20 @@ const FormContainer = ({title, setSideMenus, sideMenus, DataForm, data, setValDa
     //     .then(data => console.log(data))
     // }
 
+    const logout = () => {
+        localStorage.removeItem("bearer");
+
+        setBearer(null)
+        navigate("/login")
+    }
+
     return (
         <div className='form-container'>
-            <h1 className='form-title'>Create {title}</h1>
+            <div className="header">
+                <h1 className='form-title'>Create {title}</h1>
+
+                <button type='button' className='btn-logout' onClick={(e) => logout()}>Log Out</button>
+            </div>
             <button className='form-toggle-btn' type='button' onClick={() => toggleShowForm(!showForm)}><img alt='form-icon' className='form-icon' src={FormIcon}/> Create a Form</button>
             {
             showForm 

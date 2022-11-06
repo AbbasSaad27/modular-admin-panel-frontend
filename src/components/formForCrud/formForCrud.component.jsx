@@ -12,7 +12,7 @@ const FormForCrud = ({title, setSideMenus, sideMenus}) => {
     const [value, setValue] = useState({inputFields: []});
     const [elArr, addToElArr] = useState([CrudForm]);
     const [loader, setLoader] = useState(false);
-    const bearer = useContext(BearerContext)
+    const {bearer} = useContext(BearerContext)
 
     const deleteCrudForm = (e) => {
         const indx = Number(e.target.parentElement.parentElement.dataset.indx)
@@ -56,7 +56,7 @@ const FormForCrud = ({title, setSideMenus, sideMenus}) => {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
-                "Authorization": bearer
+                "Authorization": `Bearer ${bearer}`
             }, 
             body: JSON.stringify({...value, inputFields: [ ...newInputFields]})
         })
