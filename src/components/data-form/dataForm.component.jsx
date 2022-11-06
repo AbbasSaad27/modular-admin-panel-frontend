@@ -6,26 +6,38 @@ import Input from "../input/input.component";
 import "./dataForm.styles.css";
 
 import UserContext from "../../utilities/contexts/userContexts/userContext";
+import BearerContext from "../../utilities/contexts/bearerContext/bearerContext";
 
 const DataForm = ({data: {crudName, inputFields}, setValData}) => {
     const [docRefs, setDocRefs] = useState("");
     const [permissions, setPermissions] = useState([]);
     const [roles, setRoles] = useState([])
     const crudItems = useContext(UserContext);
+    const bearer = useContext(BearerContext)
 
     useEffect(() => {
         if(crudName === "roles") {
-            fetch("https://modular-ap.herokuapp.com/api/data/permissions")
+            fetch("https://modular-ap.herokuapp.com/api/data/permissions", {
+                method: "GET",
+                headers: {
+                    "Authorization": bearer
+                }
+            })
             .then(res => res.json())
             .then(data => setPermissions([...data.data]))
         }
         if(crudName === "users") {
-            fetch("https://modular-ap.herokuapp.com/api/data/roles")
+            fetch("https://modular-ap.herokuapp.com/api/data/roles", {
+                method: "GET",
+                headers: {
+                    "Authorization": bearer
+                }
+            })
             .then(res => res.json())
             .then(data => setRoles([...data.data]))
         }
 
-    }, [crudName]) 
+    }, [crudName, bearer]) 
 
     const initObj = {}
     inputFields.forEach((inpObj) => {
@@ -55,12 +67,18 @@ const DataForm = ({data: {crudName, inputFields}, setValData}) => {
             method: "POST",
             headers: {
                 'Accept': 'application/json',
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                "Authorization": bearer
             },
             body: JSON.stringify(inputVals)
         })
         
-        const dataRes = await fetch(`https://modular-ap.herokuapp.com/api/data/${crudName.toLowerCase()}`)
+        const dataRes = await fetch(`https://modular-ap.herokuapp.com/api/data/${crudName.toLowerCase()}`, {
+            method: "GET",
+            headers: {
+                "Authorization": bearer
+            }
+        })
         const data = await dataRes.json();
         setValData(data.data);
     }
@@ -88,7 +106,12 @@ const DataForm = ({data: {crudName, inputFields}, setValData}) => {
             [name]: value,
         })
         if(name.includes("collection")) {
-            fetch(`https://modular-ap.herokuapp.com/api/data/${selectedVal.toLowerCase()}`)
+            fetch(`https://modular-ap.herokuapp.com/api/data/${selectedVal.toLowerCase()}`, {
+                method: "GET",
+                headers: {
+                    "Authorization": bearer
+                }
+            })
             .then(rest => rest.json())
             .then(data => setDocRefs(data.data))
         }

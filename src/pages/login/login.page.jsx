@@ -1,0 +1,80 @@
+import React, {useState} from 'react';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+
+import Form from '../../components/form/form.component';
+import Input from '../../components/input/input.component';
+import Loader from '../../components/loader/loader.component';
+
+import "./login.styles.css";
+
+const Login = ({setBearer}) => {
+    const [loader, setLoader] = useState(false);
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        const prevBearer = localStorage.getItem("bearer");
+        if(prevBearer) {
+            setBearer(prevBearer);
+            navigate("/")
+        }
+    })
+
+    const initData = {
+        email: '',
+        password: '',
+    }
+
+    const [data, setData] = useState(initData);
+
+    const changeData = (e) => {
+        const {value, name} = e.target;
+
+        setData({
+            ...data,
+            [name]: value,
+        })
+    }
+
+    const submitData = (e) => {
+        e.preventDefault();
+        setLoader(true)
+
+        fetch("https://modular-ap.herokuapp.com/api/user/login", {
+            method: "POST", 
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data) 
+        })
+        .then(res => res.json())
+        .then(data => {
+            alert(data.message)
+            if(data.token) {
+                localStorage.setItem("bearer", data.token)
+                setBearer(data.token)
+                navigate("/")
+            }
+            setLoader(false)
+        })
+        .catch(err => alert(err.message))
+    }
+
+    return (
+        !loader ? 
+        <div className="login-page">
+            <div className="page-content">
+                <h1 className='page-header'>Login</h1>
+                <Form>
+                    <Input label="Email" inpValue={data["email"]} type="email" placeholder="enter your email" name="email" changeData={changeData} required/>
+                    <Input label="Password" inpValue={data["password"]} type="password" placeholder="enter your password" changeData={changeData} name="password" required/>
+
+                    <button type='button' className='btn btn-login' onClick={(e) => submitData(e)}>Log In</button>
+                </Form>
+            </div>
+        </div> : <Loader />
+    )
+}
+
+export default Login

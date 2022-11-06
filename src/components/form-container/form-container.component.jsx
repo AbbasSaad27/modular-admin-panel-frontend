@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+import { useContext } from 'react';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 // import axios from 'axios';
 
 // import Form from '../form/form.component';
@@ -6,10 +9,21 @@ import FormIcon from "../../images/contact-form.png"
 // import Input from '../input/input.component';
 // import CrudForm from '../crud-form/crudForm.component';
 
+import BearerContext from '../../utilities/contexts/bearerContext/bearerContext';
+
 import "./form-container.styles.css";
 // import FormForCrud from '../formForCrud/formForCrud.component';
 
 const FormContainer = ({title, setSideMenus, sideMenus, DataForm, data, setValData}) => {
+    const navigate = useNavigate();
+    const bearer = useContext(BearerContext)
+    useEffect(() => {
+        if(!bearer) {
+            console.log("helo")
+            navigate("/login")
+        }
+    },)
+
     const [showForm, toggleShowForm] = useState(false);
     // const [inputCount, incrsInputCount] = useState(1);
     // const mtArray = Array(inputCount).fill("el")

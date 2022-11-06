@@ -5,10 +5,14 @@ import Input from "../input/input.component";
 import CrudForm from "../crud-form/crudForm.component";
 import Loader from "../loader/loader.component";
 
+import BearerContext from "../../utilities/contexts/bearerContext/bearerContext";
+import { useContext } from "react";
+
 const FormForCrud = ({title, setSideMenus, sideMenus}) => {
     const [value, setValue] = useState({inputFields: []});
     const [elArr, addToElArr] = useState([CrudForm]);
     const [loader, setLoader] = useState(false);
+    const bearer = useContext(BearerContext)
 
     const deleteCrudForm = (e) => {
         const indx = Number(e.target.parentElement.parentElement.dataset.indx)
@@ -51,7 +55,8 @@ const FormForCrud = ({title, setSideMenus, sideMenus}) => {
             method: "POST",
             headers: {
                 'Accept': 'application/json',
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                "Authorization": bearer
             }, 
             body: JSON.stringify({...value, inputFields: [ ...newInputFields]})
         })
