@@ -13,8 +13,14 @@ const DropDown = ({name, placeholder, label, opt, docs, changeVal, prop}) => {
                                         <option defaultValue={isFirst} hidden={isFirst} key={i+1} value={txt}>{txt}</option>
                                     )
                     const nameProp = Object.keys(txt).filter((key) => key.toLowerCase().includes("name"))[0];
+                    let val;
+                    if(txt[prop]) {
+                        val = txt[prop]
+                    } else {
+                        val = txt[nameProp]
+                    }
                     return(
-                        <option key={i+1} value={txt._id}>{txt[nameProp ? nameProp : prop]}</option>
+                        <option key={i+1} value={txt._id}>{val}</option>
                     )
                 })}
             </select>
