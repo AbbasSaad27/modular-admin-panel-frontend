@@ -87,10 +87,17 @@ const DataForm = ({data: {crudName, inputFields}, setValData}) => {
         const {target} = e
         const {value, name, options, selectedIndex} = target
         const selectedVal = value;
+        console.log(value)
         if(name === "permissions") {
+            const val = [];
+            [...options].forEach(opt => {
+                if(opt.selected) {
+                    val.push(opt.value)
+                }
+            })
             setInputVals({
                 ...inputVals,
-                [name]: [value],
+                [name]: val,
             })
             return;
         }
@@ -148,7 +155,7 @@ const DataForm = ({data: {crudName, inputFields}, setValData}) => {
                 if(obj.type === "dropdown" && crudName === "roles" && permissions[0]) {
                     return (
                         <div key={i+1} className="drop-down-block">
-                            <DropDown {...obj} changeVal={changeDropdVal} opt={permissions} prop="title"/>
+                            <DropDown {...obj} changeVal={changeDropdVal} opt={permissions} prop="title" multiple/>
                         </div>
                     )
                 }

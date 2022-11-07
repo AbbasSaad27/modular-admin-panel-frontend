@@ -23,8 +23,8 @@ const DataTable = ({crudItem, setData, data = []}) => {
                                 Object.values(obj).map((value, i) => {
                                     let formattedValue;
                                     if(typeof value === "object" && value !== null) formattedValue = value.join(", ");
-                                    if(!value) formattedValue = "All Docs";
                                     else formattedValue = value;
+                                    if(!value) formattedValue = "All Docs";
                                     if(obj["__v"] === value) return ""
                                     return <td key={i+1}>{i === 0 ? (indx+1) : formattedValue}</td>
                                 })
