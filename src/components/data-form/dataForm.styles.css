@@ -12,6 +12,10 @@
     width: auto;
 }
 
+.checkbox-input-container label {
+    margin-bottom: 0;
+}
+
 .drop-down-block {
     display: block;
     margin: 2rem 0;

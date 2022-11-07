@@ -72,6 +72,7 @@ const FormForCrud = ({title, setSideMenus, sideMenus}) => {
             <Loader />
         :   <Form>
                 <Input inputName={title} setValue={setValue} value={value} required/>
+                <Input label="Show In The Menu" type="checkbox" value={value}  setValue={setValue} inputName="showInTheMenu" classname="checkbox-input-container"/>
                 {elArr.map((el, i) => {
                     return <React.Fragment key={i+1}>{el({i, setValue, value, deleteCrudForm})}</React.Fragment>
                 })}

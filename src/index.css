@@ -50,3 +50,7 @@ a {
 .scrollbar::-webkit-scrollbar-thumb {
   background: #1B1811;
 }
+
+.d-block {
+  display: block;
+}

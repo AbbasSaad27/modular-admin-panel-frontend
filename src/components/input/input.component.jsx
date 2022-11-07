@@ -6,7 +6,8 @@ const Input = ({inputName, label, placeholder, name, required, indx, setValue, v
     const changeValue = function(e) {
         if(!inputNameMod){
             const newArr = [...value.inputFields];
-            newArr[indx] ? newArr[indx][name] = e.target.value : newArr[indx] = {[name]: e.target.value};
+            const val = type === "checkbox" ? e.target.checked : e.target.value
+            newArr[indx] ? newArr[indx][name] = val : newArr[indx] = {[name]: val};
             setValue({
                 ...value,
                 inputFields:  [...newArr]
@@ -15,7 +16,8 @@ const Input = ({inputName, label, placeholder, name, required, indx, setValue, v
         }
 
         setValue({
-            [inputNameMod]: e.target.value,
+            ...value,
+            [inputNameMod]: type === "checkbox" ? e.target.checked : e.target.value,
             inputFields: [...value.inputFields]
         })
     }
