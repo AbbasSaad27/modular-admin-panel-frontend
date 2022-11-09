@@ -9,7 +9,7 @@ import BearerContext from "../../utilities/contexts/bearerContext/bearerContext"
 import { useContext } from "react";
 
 const FormForCrud = ({title, setSideMenus, sideMenus}) => {
-    const [value, setValue] = useState({inputFields: []});
+    const [value, setValue] = useState({showInTheAppMenu: false, inputFields: []});
     const [elArr, addToElArr] = useState([CrudForm]);
     const [loader, setLoader] = useState(false);
     const {bearer} = useContext(BearerContext)
@@ -35,13 +35,6 @@ const FormForCrud = ({title, setSideMenus, sideMenus}) => {
         //     data: {...value}
         // })
         const newInputFields = value.inputFields.map((obj) => {
-            if(obj["type"] === "checkbox") {
-                const newObj = {
-                    ...obj,
-                    options: ["create", "read", "delete", "update"]
-                }
-                return newObj
-            }
 
             return obj;
         })

@@ -9,7 +9,8 @@ import UserContext from "../../utilities/contexts/userContexts/userContext";
 import BearerContext from "../../utilities/contexts/bearerContext/bearerContext";
 
 const DataForm = ({data: {crudName, inputFields}, setValData}) => {
-    const [docRefs, setDocRefs] = useState("");
+    console.log(inputFields)
+    const [docRefs, setDocRefs] = useState([]);
     const [permissions, setPermissions] = useState([]);
     const [roles, setRoles] = useState([])
     const crudItems = useContext(UserContext);
@@ -121,11 +122,21 @@ const DataForm = ({data: {crudName, inputFields}, setValData}) => {
             })
             .then(rest => rest.json())
             .then(data => setDocRefs(data.data))
+            .catch(err => console.log(err))
         }
     }
 
     const checkBoxChange = (e) => {
         const {value, checked, name} = e.target;
+
+        if(name.toLowerCase().includes("create")) {
+            setInputVals({
+                ...inputVals,
+                [name]: checked
+            })
+            console.log(inputVals)
+            return;
+        }
 
         if(checked) {
             setInputVals({
@@ -170,11 +181,13 @@ const DataForm = ({data: {crudName, inputFields}, setValData}) => {
                     return (
                         <div key={i+1} className="checkbox-block">
                         {    
-                            ["create", "read", "update", "delete"].map((opt, ind) => {
+                            obj.name === "actions" ? ["create", "read", "update", "delete"].map((opt, ind) => {
                                 return(
                                     <Input key={ind + 1} label={opt} inpValue={opt} type={obj.type} name={obj.name} changeData={checkBoxChange} required classname="checkbox-input-container"/>
                                 )
-                            })
+                            }) : <Input name={obj.name} type={obj.type} label={obj.label} required classname="checkbox-input-container" changeData={checkBoxChange}/>
+
+
                         }
                         </div>
                     )

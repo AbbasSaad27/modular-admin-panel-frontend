@@ -16,7 +16,7 @@ const CrudItem = () => {
     const [valData, setValData] = useState([])
     const [data, setData] = useState({})
     const crudItemLow = crudItem.toLowerCase();
-    const {bearer} = useContext(BearerContext);
+    const {bearer, setBearer} = useContext(BearerContext);
     const navigate = useNavigate();
 
     useEffect(function() {
@@ -44,8 +44,18 @@ const CrudItem = () => {
             })
             .then(res => res.json())
             .then(data => {
+                setLoader(false)
                 if(data.status === 'fail') {
                     navigate("*")
+                    return;
+                }
+
+                if(data.message.includes("expired")) {
+                    setBearer("");
+                }
+                if(data.status === "error") {
+                    navigate("*")
+                    alert(data.message)
                     return;
                 }
                 setValData([...data.data])

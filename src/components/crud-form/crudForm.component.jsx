@@ -14,8 +14,8 @@ const CrudForm = ({setValue, value, i, deleteCrudForm}) => {
                 <Input indx={i} name="label" label="Enter Label For Input" required setValue={setValue} value={value}/>
                 <Input indx={i} name="placeholder" label="Enter Placeholder for Input" required setValue={setValue} value={value}/>
                 <Input indx={i} name="name" label="Enter Name of Input" required setValue={setValue} value={value}/>
-                <Input indx={i} label="IQR" type="checkbox" value={value}  setValue={setValue} name="iqr" classname="checkbox-input-container d-block"/>
-                <Input indx={i} label="IVR" type="checkbox" value={value}  setValue={setValue} name="ivr" classname="checkbox-input-container"/>
+                <Input indx={i} label="IRQ" type="checkbox" value={value}  setValue={setValue} name="irq" classname="checkbox-input-container d-block"/>
+                <Input indx={i} label="IRV" type="checkbox" value={value}  setValue={setValue} name="irv" classname="checkbox-input-container"/>
             </div>
         </div>
     )
