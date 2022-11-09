@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
+import {BrowserRouter as Router, Routes, Route, useNavigate} from 'react-router-dom'
 import {useLocation} from "react-router-dom"
 
 import './App.css';
@@ -18,6 +18,10 @@ function App() {
   const [sideMenus, setSideMenus] = useState(undefined)
   const [bearer, setBearer] = useState(null)
   const location = useLocation()
+
+  const navigate = useNavigate();
+
+  if(!bearer) navigate("/login")
 
   useEffect(function() {
     if(bearer) {  
