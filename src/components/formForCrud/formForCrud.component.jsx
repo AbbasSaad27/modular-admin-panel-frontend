@@ -9,7 +9,7 @@ import BearerContext from "../../utilities/contexts/bearerContext/bearerContext"
 import { useContext } from "react";
 
 const FormForCrud = ({title, setSideMenus, sideMenus}) => {
-    const [value, setValue] = useState({showInTheAppMenu: false, inputFields: []});
+    const [value, setValue] = useState({showInTheMenu: false, inputFields: []});
     const [elArr, addToElArr] = useState([CrudForm]);
     const [loader, setLoader] = useState(false);
     const {bearer} = useContext(BearerContext)
@@ -35,15 +35,8 @@ const FormForCrud = ({title, setSideMenus, sideMenus}) => {
         //     data: {...value}
         // })
         const newInputFields = value.inputFields.map((obj) => {
-
             return obj;
         })
-        // if(ifCheckBox)  { 
-        // setValue({
-        //     ...value,
-        //     inputFields: [ newInputFields ]
-        // })
-        // }
         fetch("https://modular-ap.herokuapp.com/api/crud", {
             method: "POST",
             headers: {
@@ -54,10 +47,15 @@ const FormForCrud = ({title, setSideMenus, sideMenus}) => {
             body: JSON.stringify({...value, inputFields: [ ...newInputFields]})
         })
         .then(res => res.json())
-        .then(data => setLoader(false))
-        setSideMenus([...sideMenus, value.crudName]);
-        setValue({});
-        addToElArr([CrudForm]);
+        .then(data =>{ 
+            console.log(data, value);
+            if(data.status !== "error" || data.status !== "fail") {
+                setSideMenus([...sideMenus, value.crudName]);
+                setValue({});
+                addToElArr([CrudForm]);
+            }
+            setLoader(false)
+        })
     }
     return ( 
         loader 

@@ -13,7 +13,7 @@ const Login = ({setBearer}) => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        const prevBearer = localStorage.getItem("bearer");
+        const prevBearer = JSON.parse(localStorage.getItem("user"));
         if(prevBearer) {
             setBearer(prevBearer);
             navigate("/")
@@ -54,8 +54,9 @@ const Login = ({setBearer}) => {
         .then(data => {
             alert(data.message)
             if(data.token) {
-                localStorage.setItem("bearer", data.token)
-                setBearer(data.token)
+                const user = {token: data.token, perm: data.canCreateCrudItem}
+                localStorage.setItem("user", JSON.stringify(user))
+                setBearer(user)
                 navigate("/")
             }
             setLoader(false)
