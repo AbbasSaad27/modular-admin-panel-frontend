@@ -19,10 +19,6 @@ function App() {
   const [bearer, setBearer] = useState(null)
   const location = useLocation()
 
-  const navigate = useNavigate();
-
-  if(!bearer) navigate("/login")
-
   useEffect(function() {
     if(bearer) {  
       fetch("https://modular-ap.herokuapp.com/api/crud", {
