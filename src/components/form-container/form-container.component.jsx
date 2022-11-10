@@ -10,6 +10,7 @@ import FormIcon from "../../images/contact-form.png"
 // import CrudForm from '../crud-form/crudForm.component';
 
 import BearerContext from '../../utilities/contexts/bearerContext/bearerContext';
+import LogoutBtn from '../logout-btn/logoutBtn.component';
 
 import "./form-container.styles.css";
 // import FormForCrud from '../formForCrud/formForCrud.component';
@@ -24,55 +25,13 @@ const FormContainer = ({title, setSideMenus, sideMenus, DataForm, data, setValDa
     },)
 
     const [showForm, toggleShowForm] = useState(false);
-    // const [inputCount, incrsInputCount] = useState(1);
-    // const mtArray = Array(inputCount).fill("el")
-    // const [value, setValue] = useState({inputFields: []})
-    // const [elArr, addToElArr] = useState([CrudForm])
-
-    // const deleteCrudForm = (e) => {
-    //     const indx = Number(e.target.parentElement.parentElement.dataset.indx)
-    //     const newElArr = elArr.filter((_, i) => indx !== i);
-    //     const newValue = value.inputFields.filter((_, i) => indx !== i);
-
-    //     addToElArr([...newElArr]);
-    //     setValue({
-    //         ...value,
-    //         inputFields: [...newValue]
-    //     });
-    // }
-
-    // const sendData = (e) => {
-    //     e.preventDefault();
-    //     // axios({
-    //     //     method: "post",
-    //     //     url: "https://modular-ap.herokuapp.com/api/crud",
-    //     //     data: {...value}
-    //     // })
-    //     fetch("https://modular-ap.herokuapp.com/api/crud", {
-    //         method: "POST",
-    //         headers: {
-    //             'Accept': 'application/json',
-    //             'Content-Type': 'application/json'
-    //         }, 
-    //         body: JSON.stringify(value)
-    //     })
-    //     .then(res => res.json())
-    //     .then(data => console.log(data))
-    // }
-
-    const logout = () => {
-        localStorage.removeItem("bearer");
-
-        setBearer(null)
-        navigate("/login")
-    }
 
     return (
         <div className='form-container'>
             <div className="header">
                 <h1 className='form-title'>Create {title}</h1>
 
-                <button type='button' className='btn-logout' onClick={(e) => logout()}>Log Out</button>
+                <LogoutBtn />
             </div>
             <button className='form-toggle-btn' type='button' onClick={() => toggleShowForm(!showForm)}><img alt='form-icon' className='form-icon' src={FormIcon}/> Create a Form</button>
             {

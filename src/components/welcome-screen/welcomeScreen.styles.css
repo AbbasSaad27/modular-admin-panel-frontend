@@ -1,8 +1,11 @@
 .welcome-screen {
     flex: 1;
+    display: flex;
+    padding: 2rem;
+    align-items: flex-start;
+    justify-content: space-between;
 }
 .welcome-message {
     text-align: center;
     font-size: 3rem;
-    padding: 2rem;
 }
