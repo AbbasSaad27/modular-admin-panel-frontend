@@ -15,21 +15,21 @@ import LogoutBtn from '../logout-btn/logoutBtn.component';
 import "./form-container.styles.css";
 // import FormForCrud from '../formForCrud/formForCrud.component';
 
-const FormContainer = ({title, setSideMenus, sideMenus, DataForm, data, setValData}) => {
+const FormContainer = ({title, setSideMenus, sideMenus, DataForm, data, setValData, formTitle}) => {
     const navigate = useNavigate();
-    const {bearer, setBearer} = useContext(BearerContext)
+    const {bearer} = useContext(BearerContext)
     useEffect(() => {
         if(!bearer) {
             navigate("/login")
         }
-    },)
+    })
 
     const [showForm, toggleShowForm] = useState(false);
 
     return (
         <div className='form-container'>
             <div className="header">
-                <h1 className='form-title'>Create {title}</h1>
+                <h1 className='form-title'>{formTitle ? formTitle : `Create ${title}`}</h1>
 
                 <LogoutBtn />
             </div>

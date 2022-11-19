@@ -1,12 +1,13 @@
 import React from "react";
 import "./dropdown.styles.css";
 
-const DropDown = ({name, placeholder, label, opt, docs, changeVal, prop, multiple}) => {
+const DropDown = ({name, placeholder, label, opt = [], docs, changeVal, prop, multiple, dataId}) => {
     const options = [placeholder].concat(opt[0] ? opt : docs)
+    console.log(opt, options)
     return (
         <>
             <label htmlFor={name}>{label}</label>
-            <select className="dropdown scrollbar" placeholder={placeholder} name={name} onChange={(e) => {changeVal && changeVal(e)}} multiple>
+            <select data-id={dataId ? dataId : ""} className="dropdown scrollbar" placeholder={placeholder} name={name} onChange={(e) => {changeVal && changeVal(e)}} multiple>
                 {options.map((txt, i) => {
                     const isFirst = i === 0;
                     if(typeof txt === "string") return(

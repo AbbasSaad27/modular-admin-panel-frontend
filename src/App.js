@@ -19,8 +19,7 @@ function App() {
   const [sideMenus, setSideMenus] = useState(undefined)
   const [bearer, setBearer] = useState(null)
   const location = useLocation()
-
-
+  
   useEffect(function() {
     if(bearer?.token) {
       fetch("https://modular-ap.herokuapp.com/api/crud", {
@@ -31,6 +30,11 @@ function App() {
       })
       .then(res => res.json())
       .then(data => setSideMenus([ ...data.crudItems]))
+    } else {
+      const prevBearer = JSON.parse(localStorage.getItem("user"));
+      if(prevBearer) {
+          setBearer(prevBearer);
+      }
     }
   }, [bearer])
   return (
@@ -40,9 +44,9 @@ function App() {
                 { sideMenus && location.pathname !== "/login" && !location.pathname.includes("*") ? 
                   <SideBar sideMenus={sideMenus}/> : bearer ? <Loader />: "" }
                 <Routes>
-                  <Route path='/' element={bearer?.perm ? <FormContainer title="Crud Name" setSideMenus={setSideMenus} sideMenus={sideMenus} DataForm={FormForCrud}/> : <WelcomeScreen token={bearer?.token} />}></Route>
+                  <Route path='/' element={bearer?.perm ? <FormContainer title="Crud Name" setSideMenus={setSideMenus} sideMenus={sideMenus} DataForm={FormForCrud}/> : <WelcomeScreen />}></Route>
                   <Route path="/login" element={<Login setBearer={setBearer}/>}></Route>
-                  <Route path='/crudItem/:crudItem' element={<UserContext.Provider value={sideMenus}><CrudItem /></UserContext.Provider>}></Route>
+                  <Route path='/crudItem/:crudItem' element={bearer?.token ? <UserContext.Provider value={sideMenus}><CrudItem /></UserContext.Provider> : ""}></Route>
                   <Route path='*' element={<ErrorPage />}></Route>
                 </Routes>
               </div>

@@ -69,7 +69,7 @@ const CrudItem = () => {
             <>
                 <FormContainer title={crudItem} DataForm={DataForm} data={data} setValData={setValData}/>
                 <div className="data-table-container">
-                    <DataTable crudItem={crudItem} data={valData}/>
+                    <DataTable bearer={bearer} crudItem={crudItem} parentData={valData} setParentData={setValData}/>
                 </div>
             </>}
         </div>

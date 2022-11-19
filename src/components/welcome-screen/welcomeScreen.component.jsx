@@ -6,7 +6,7 @@ import LogoutBtn from '../logout-btn/logoutBtn.component';
 
 import './welcomeScreen.styles.css';
 
-const WelcomeScreen = ({token, setBearer}) => {
+const WelcomeScreen = ({token, setBearer}) => { 
     const navigate = useNavigate();
     useEffect(() => {
         if(!token) {

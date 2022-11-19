@@ -9,3 +9,38 @@
 th {
     text-align: left;
 }
+/* 
+tr {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+} */
+
+.last-row button{
+    /* display: flex;
+    flex-direction: column;
+    align-items: flex-end; */
+    margin: .5rem;
+}
+.last-row {
+    text-align: right;
+}
+
+.btn-data-del {
+    margin-bottom: .5rem;
+}
+
+.edit-input {
+    font-family: inherit;
+    font-size: 1.8rem;
+    background-color: unset;
+    border: none;
+    color: black;
+    padding: .5rem;
+    overflow-x: scroll;
+    width: -webkit-fill-available;
+}
+
+.edit-input:not(:disabled) {
+    border-bottom: 2px solid #1b1811;
+}

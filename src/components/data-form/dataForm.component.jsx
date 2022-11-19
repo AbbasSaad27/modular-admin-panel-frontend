@@ -9,7 +9,6 @@ import UserContext from "../../utilities/contexts/userContexts/userContext";
 import BearerContext from "../../utilities/contexts/bearerContext/bearerContext";
 
 const DataForm = ({data: {crudName, inputFields}, setValData}) => {
-    console.log(inputFields)
     const [docRefs, setDocRefs] = useState([]);
     const [permissions, setPermissions] = useState([]);
     const [roles, setRoles] = useState([])
