@@ -87,7 +87,6 @@ const DataForm = ({data: {crudName, inputFields}, setValData}) => {
         const {target} = e
         const {value, name, options, selectedIndex} = target
         const selectedVal = value;
-        console.log(value)
         if(name === "permissions") {
             const val = [];
             [...options].forEach(opt => {
@@ -121,7 +120,6 @@ const DataForm = ({data: {crudName, inputFields}, setValData}) => {
             })
             .then(rest => rest.json())
             .then(data => setDocRefs(data.data))
-            .catch(err => console.log(err))
         }
     }
 
@@ -133,7 +131,6 @@ const DataForm = ({data: {crudName, inputFields}, setValData}) => {
                 ...inputVals,
                 [name]: checked
             })
-            console.log(inputVals)
             return;
         }
 

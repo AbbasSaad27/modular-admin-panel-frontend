@@ -6,13 +6,16 @@ import "./sidebar.styles.css";
 const SideBar = ({sideMenus}) => {
     const navigate = useNavigate();
     return(
-        <div className='side-bar'>
+        <div className='side-bar scrollbar'>
             <h1 className='side-bar--title'>LIST OF CRUDS</h1>
             <ul className='crud-list'>
                 {/* <li className='crud-list-item'><Link to="/">Hello World</Link></li> */}
                 {sideMenus.map((menu, i) => {
                     return (
-                        <li className='crud-list-item' key={i+1}><Link to={`/crudItem/${menu}`} className='menu-link'>{menu}</Link></li>
+                        <li className='crud-list-item' key={i+1}>
+                            <Link to={`/crudItem/${menu}`} className='menu-link'>{menu}</Link>
+                            <Link className='menu-link edit-link' to={`/crudItem/edit/${menu}`}>Edit</Link>
+                        </li>
                     )
                 })}
             </ul>

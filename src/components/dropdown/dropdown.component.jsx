@@ -3,7 +3,6 @@ import "./dropdown.styles.css";
 
 const DropDown = ({name, placeholder, label, opt = [], docs, changeVal, prop, multiple, dataId}) => {
     const options = [placeholder].concat(opt[0] ? opt : docs)
-    console.log(opt, options)
     return (
         <>
             <label htmlFor={name}>{label}</label>

@@ -142,30 +142,6 @@ const DataTable = ({crudItem, setParentData, parentData = [], bearer}) => {
         })
 
         setData(newDataArr)
-        // if(name === "permissions") {
-        //     const val = [];
-        //     [...options].forEach(opt => {
-        //         if(opt.selected) {
-        //             val.push(opt.value)
-        //         }
-        //     })
-        //     setData({
-        //         ...data,
-        //         [name]: val
-        //     })
-        //     return;
-        // }
-        // if(name === "role") {
-        //     setData({
-        //         ...data,
-        //         [name]: options[selectedIndex].text
-        //     })
-        //     return;
-        // }
-        // setData({
-        //     ...data,
-        //     [name]: value,
-        // })
         if(name.includes("collection")) {
             fetch(`https://modular-ap.herokuapp.com/api/data/${selectedVal.toLowerCase()}`, {
                 method: "GET",
@@ -219,7 +195,7 @@ const DataTable = ({crudItem, setParentData, parentData = [], bearer}) => {
                                         <DropDown dataId={obj._id} name={propName} docs={docRefs[0] ? docRefs : []} prop="title" placeholder="Update Permissions" changeVal={dropdownChange}/>
                                     </td>
                                     }
-                                    return <td key={i+1}>{i === 0 ? (indx+1) : <input data-id={obj._id} type="text" name={propName} value={formattedValue} disabled={disabled[indx]?.state ? true : false} className="edit-input scroller" onChange={(e) => handleChange(e)}/>}</td>
+                                    return <td key={i+1}>{i === 0 ? (indx+1) : <input data-id={obj._id} type="text" name={propName} value={formattedValue} disabled={disabled[indx]?.state ? true : false} className="edit-input scrollbar" onChange={(e) => handleChange(e)}/>}</td>
                                 })
                             }           
                             <td className="last-row">

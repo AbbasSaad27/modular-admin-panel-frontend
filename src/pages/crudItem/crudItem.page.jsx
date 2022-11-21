@@ -44,7 +44,6 @@ const CrudItem = () => {
             })
             .then(res => res.json())
             .then(data => {
-                setLoader(false)
                 if(data.status === 'fail') {
                     navigate("*")
                     return;

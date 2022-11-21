@@ -12,7 +12,6 @@ const LogoutBtn = () => {
 
     const logout = () => {
         localStorage.removeItem("user");
-        console.log("henlo")
         setBearer(null)
         navigate("/login")
     }

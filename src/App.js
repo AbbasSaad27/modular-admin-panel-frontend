@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
+import { Routes, Route} from 'react-router-dom'
 import {useLocation} from "react-router-dom"
 
 import './App.css';
@@ -14,6 +14,7 @@ import BearerContext from './utilities/contexts/bearerContext/bearerContext';
 import Login from './pages/login/login.page';
 import ErrorPage from './pages/404page/error.page';
 import WelcomeScreen from './components/welcome-screen/welcomeScreen.component';
+import CrudItemEdit from './pages/crudItem-edit/crudItem-edit-page.component';
 
 function App() {
   const [sideMenus, setSideMenus] = useState(undefined)
@@ -29,7 +30,13 @@ function App() {
         }
       })
       .then(res => res.json())
-      .then(data => setSideMenus([ ...data.crudItems]))
+      .then(data => {
+        if(data.message?.includes("expired")) {
+          alert("Your login has expired. Please logout and login again")
+          return;
+        }
+        setSideMenus([ ...data.crudItems])
+      })
     } else {
       const prevBearer = JSON.parse(localStorage.getItem("user"));
       if(prevBearer) {
@@ -47,6 +54,7 @@ function App() {
                   <Route path='/' element={bearer?.perm ? <FormContainer title="Crud Name" setSideMenus={setSideMenus} sideMenus={sideMenus} DataForm={FormForCrud}/> : <WelcomeScreen />}></Route>
                   <Route path="/login" element={<Login setBearer={setBearer}/>}></Route>
                   <Route path='/crudItem/:crudItem' element={bearer?.token ? <UserContext.Provider value={sideMenus}><CrudItem /></UserContext.Provider> : ""}></Route>
+                  <Route path='/crudItem/edit/:crudItem' element={<CrudItemEdit />}></Route>
                   <Route path='*' element={<ErrorPage />}></Route>
                 </Routes>
               </div>

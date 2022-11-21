@@ -48,7 +48,7 @@ const FormContainer = ({title, setSideMenus, sideMenus, DataForm, data, setValDa
             //             <button type='submit' className='btn-submit' onClick={(e) => {sendData(e)}}>Submit</button>
             //         </div>
             // </Form>
-            <DataForm title={title} setSideMenus={setSideMenus} sideMenus={sideMenus} data={data} setValData={setValData}/>
+            <DataForm title={title} setSideMenus={setSideMenus} sideMenus={sideMenus} data={data} setValData={setValData} type={formTitle}/>
             : 
             ""
             }

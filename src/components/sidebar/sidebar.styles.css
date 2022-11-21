@@ -7,7 +7,8 @@
     color: white;
     background-color: #1B1811;
     position: relative;
-    padding-bottom: 3rem;
+    padding-bottom: 7rem;
+    overflow-y: auto;
 }
 .side-bar--title {
     font-size: 2.5rem;
@@ -23,6 +24,9 @@
     margin-top: 1rem;
     padding: 1rem;
     border-bottom: 2px solid #FFEFD6;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .menu-link {
@@ -37,4 +41,9 @@
     font-size: 1.5rem;
     position: absolute;
     bottom: 0;
+    right: 0;
+}
+
+.edit-link {
+    font-size: 1.4rem;
 }
