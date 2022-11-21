@@ -1,15 +1,18 @@
 import React from 'react';
+import { useContext } from 'react';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import BearerContext from '../../utilities/contexts/bearerContext/bearerContext';
 
 import LogoutBtn from '../logout-btn/logoutBtn.component';
 
 import './welcomeScreen.styles.css';
 
-const WelcomeScreen = ({token, setBearer}) => { 
+const WelcomeScreen = () => {
+    const {bearer, setBearer} = useContext(BearerContext) 
     const navigate = useNavigate();
     useEffect(() => {
-        if(!token) {
+        if(!bearer) {
             navigate("/login")
             return;
         }

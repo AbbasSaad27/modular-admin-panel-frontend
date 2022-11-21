@@ -45,15 +45,18 @@ const CrudItem = () => {
             .then(res => res.json())
             .then(data => {
                 if(data.status === 'fail') {
+                    setLoader(false)
                     navigate("*")
                     return;
                 }
 
                 if(data.message.includes("expired")) {
+                    setLoader(false)
                     setBearer("");
                 }
                 if(data.status === "error") {
                     navigate("*")
+                    setLoader(false)
                     alert(data.message)
                     return;
                 }

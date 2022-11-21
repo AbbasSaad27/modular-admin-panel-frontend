@@ -4,7 +4,6 @@ import {useLocation} from "react-router-dom"
 
 import './App.css';
 import FormContainer from './components/form-container/form-container.component';
-import Loader from './components/loader/loader.component';
 import SideBar from './components/sidebar/sidebar.component';
 import CrudItem from './pages/crudItem/crudItem.page';
 import FormForCrud from './components/formForCrud/formForCrud.component';
@@ -20,6 +19,7 @@ function App() {
   const [sideMenus, setSideMenus] = useState(undefined)
   const [bearer, setBearer] = useState(null)
   const location = useLocation()
+  console.log(location.pathname.includes("*"))
   
   useEffect(function() {
     if(bearer?.token) {
@@ -49,12 +49,13 @@ function App() {
             <>
               <div className="App">
                 { sideMenus && location.pathname !== "/login" && !location.pathname.includes("*") ? 
-                  <SideBar sideMenus={sideMenus}/> : bearer ? <Loader />: "" }
+                  <SideBar sideMenus={sideMenus} perm={bearer?.perm}/> :  "" }
                 <Routes>
                   <Route path='/' element={bearer?.perm ? <FormContainer title="Crud Name" setSideMenus={setSideMenus} sideMenus={sideMenus} DataForm={FormForCrud}/> : <WelcomeScreen />}></Route>
                   <Route path="/login" element={<Login setBearer={setBearer}/>}></Route>
                   <Route path='/crudItem/:crudItem' element={bearer?.token ? <UserContext.Provider value={sideMenus}><CrudItem /></UserContext.Provider> : ""}></Route>
-                  <Route path='/crudItem/edit/:crudItem' element={<CrudItemEdit />}></Route>
+                  <Route path='/crudItem/edit/:crudItem' element={bearer?.perm ? <CrudItemEdit /> : <ErrorPage />}></Route>
+                  {/* <Route path='/crudItem/edit/:crudItem' element={<CrudItemEdit />}></Route> */}
                   <Route path='*' element={<ErrorPage />}></Route>
                 </Routes>
               </div>
